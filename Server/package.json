@@ -1,0 +1,25 @@
+{
+	"name": "SteamNodeServer",
+	"version": "0.1.0dev",
+	"private": true,
+	"author": "Kean Walmsley - Autodesk",
+	"description": "Node.js Server app the Steampunk viewer",
+	"contributors": [
+		{"name": "Kean Walmsley"},
+		{"name": "Philippe Leefsma"},
+		{"name": "Jon Hall"},
+		{"name": "Jan Liska"}
+	],
+	"scripts": {
+		"predeploy": "echo Deploying SteamNodeServer",
+		"postdepoly": "echo SteamNodeServer Deployed"
+	},
+	"dependencies": {
+		"socket.io": "0.9.x",
+		"express": "3.x",
+		"request": "*"
+	},
+	"engines": {
+		"node": "0.10.x"
+	}
+}

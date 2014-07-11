@@ -1,0 +1,14 @@
+#viewer { width:763px; height:578px; margin:auto; position:relative; background:url(../img/viewer.jpg) no-repeat; }
+#window { width:468px; height:468px; margin:52px 0 0 60px; position:relative; float:left; overflow:hidden; }
+#ui { width:165px; margin:153px 29px 0 0; float:right; }
+#ui ul { padding:0; margin:0; list-style-type:none; }
+#ui li { height:56px; margin-bottom:20px; background-image:url(../img/labels.png); }
+#ui li a { display:block; height:100%; overflow:hidden; text-indent:-5000px; }
+#ui li a:focus { outline:none; }
+#label2 { background-position:0 -56px; }
+#label3 { background-position:0 -114px; }
+#label4 { background-position:0 -170px; }
+#label5 { background-position:0 -228px; }
+#ui span { display:none; }
+#cog { width:79px; height:78px; position:absolute; top:141px; right:-32px; z-index:-1; background:url(../img/cog.png) no-repeat 0 0; }
+#over { width:208px; height:89px; position:absolute; top:137px; right:-8px; background:url(../img/over.png) no-repeat 0 0; }
