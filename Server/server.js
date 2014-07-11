@@ -17,33 +17,31 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 var express = require('express');
+var morgan = require('morgan');
 var api = require('./api');
 
 var app = express();
 
-app.configure(function () {
-    /* 'default', 'short', 'tiny', 'dev' */
-    app.use(express.logger('dev'));     
-    app.use(express.bodyParser());
-});
+app.use(morgan({ format: 'dev', immediate: true }));     
+//app.use(express.bodyParser());
 
 /////////////////////////////////////////////////////////////////////////////////
 //  Webpages server
 //
 /////////////////////////////////////////////////////////////////////////////////
-app.use('/nodeview', express.static(__dirname + '/../RibbonClient'));
-//app.use('/nodeview', express.static(__dirname + '/../Client'));
+app.use('/steamed', express.static(__dirname + '/../SteamClient'));
+//app.use('/steamed', express.static(__dirname + '/../Client'));
 
 /////////////////////////////////////////////////////////////////////////////////
 //  Rest API
 //
 /////////////////////////////////////////////////////////////////////////////////
-app.get('/nodeview/api/token', api.getToken);
+app.get('/steamed/api/token', api.getToken);
 
 /////////////////////////////////////////////////////////////////////////////////
 //  
 //
 /////////////////////////////////////////////////////////////////////////////////
-app.listen(process.env.PORT || 3000);
+app.listen(3000);//process.env.PORT || 3000);
 
 console.log('Listening on port 3000...');

@@ -16,7 +16,10 @@
 	},
 	"dependencies": {
 		"socket.io": "0.9.x",
-		"express": "3.x",
+		"express": “4.x”,
+		“morgan”: “1.x”,
+		"mongo": "*",
+		"mongodb": "*",
 		"request": "*"
 	},
 	"engines": {
