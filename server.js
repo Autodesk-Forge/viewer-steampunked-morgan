@@ -29,8 +29,7 @@ app.use(morgan({ format: 'dev', immediate: true }));
 //  Webpages server
 //
 /////////////////////////////////////////////////////////////////////////////////
-app.use('/steamed', express.static(__dirname + '/../SteamClient'));
-//app.use('/steamed', express.static(__dirname + '/../Client'));
+app.use('/steamed', express.static(__dirname + '/Client'));
 
 /////////////////////////////////////////////////////////////////////////////////
 //  Rest API
