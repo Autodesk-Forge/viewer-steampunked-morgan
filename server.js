@@ -23,7 +23,6 @@ var api = require('./api');
 var app = express();
 
 app.use(morgan({ format: 'dev', immediate: true }));     
-//app.use(express.bodyParser());
 
 /////////////////////////////////////////////////////////////////////////////////
 //  Webpages server
