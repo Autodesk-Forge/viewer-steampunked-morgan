@@ -16,7 +16,6 @@
 // UNINTERRUPTED OR ERROR FREE.
 /////////////////////////////////////////////////////////////////////////////////
 
-require('newrelic');
 var express = require('express');
 var morgan = require('morgan');
 var api = require('./api');
