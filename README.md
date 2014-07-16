@@ -25,14 +25,9 @@ SOFTWARE.
 
 ##Description
 
-*This sample is part of the [Developer-Autodesk/Autodesk-View-and-Data-API-Samples](https://github.com/Developer-Autodesk/autodesk-view-and-data-api-samples) repository.*
+*This sample is part of the [Developer-Autodesk](https://github.com/Developer-Autodesk) repository.*
 
-A set of samples demonstrating how to use the Autodesk View & Data API using a Node.js server and JavaScript/HTML5 clients :
-
-* Upload a file to bucket
-* Start translation
-* Check translation progress
-* Load it in Viewer. 
+A set of samples demonstrating how to use the Autodesk View & Data API using a Node.js server and a JavaScript/HTML5 client.
 
 ##Dependencies
 
@@ -44,5 +39,5 @@ See the sample README.md file in the sample folders.
 
 ##Written by 
 
-Philippe Leefsma
+Kean Walmsley
 
