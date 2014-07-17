@@ -21,10 +21,6 @@ var CONSUMER_SECRET = '*** ‘Your secret goes here ***’;
 var BASE_URL = 'https://developer.api.autodesk.com';
 
 var request = require('request');
-//var morgan = require('morgan');
-//var fs = require('fs');
-//var path = require('path');
-//var process = require('child_process');
 
 ///////////////////////////////////////////////////////////////////
 //  
