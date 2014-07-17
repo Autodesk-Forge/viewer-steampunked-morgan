@@ -1,6 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////////
-// Copyright (c) Autodesk, Inc. All rights reserved 
-// Written by Philippe Leefsma 2014 - ADN/Developer Technical Services
+// Copyright (c) 2014 Autodesk, Inc. All rights reserved 
 //
 // Permission to use, copy, modify, and distribute this software in
 // object code form for any purpose and without fee is hereby granted, 
