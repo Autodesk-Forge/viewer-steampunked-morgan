@@ -25,11 +25,15 @@ function initialize() {
 
       // Use 3D viewer
 
+      options.document = urn;
+
       var elem = document.getElementById('viewer3d');
       viewer = new Autodesk.Viewing.Private.GuiViewer3D(elem, {});
-      viewer.initialize();
 
-      loadDocument(auth, viewer, urn);
+      viewer.initialize();
+      Autodesk.Viewing.Initializer(options, function() {
+        loadDocument(viewer, null, options.document);
+      });
     }
   );
 
@@ -191,7 +195,7 @@ function progressListener(param) {
   }
 }
 
-function loadDocument(auth, viewer, docId) {
+function loadDocument(viewer, auth, docId) {
 
   var path = VIEWING_URL + '/' + docId.substr(4);
 
