@@ -13,7 +13,7 @@ None
 
 ##Setup/Usage Instructions
 
-*TODO*
+Please refer to http://through-the-interface.typepad.com/through_the_interface/2014/07/my-first-autodesk-360-viewer-sample.html for the backroud story fo this sample.
 
 ## License
 
