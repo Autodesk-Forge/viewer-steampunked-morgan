@@ -10,29 +10,16 @@ function initialize() {
       var options = {};
       options.env = "AutodeskProduction";
       options.accessToken = accessToken;
+      options.document =
+        "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXNy5mM2Q=";
 
-      // Initialize env, service end points, and authentication
-
-      initializeEnvironmentVariable(options);
-      initializeServiceEndPoints();
-      var auth = initializeAuth(null, options);
-
-      var urn =
-        //"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXLmYzZA=="; // Initial - not great
-        //"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXMy5mM2Q="; // Bit better materials
-        //"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXNC5mM2Q="; // Should be much better
-        "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXNy5mM2Q="; // The final one?
-
-      // Use 3D viewer
-
-      options.document = urn;
+      // Create and initialize our 3D viewer
 
       var elem = document.getElementById('viewer3d');
-      viewer = new Autodesk.Viewing.Private.GuiViewer3D(elem, {});
-
+      viewer = new Autodesk.Viewing.Viewer3D(elem, {});
       viewer.initialize();
       Autodesk.Viewing.Initializer(options, function() {
-        loadDocument(viewer, null, options.document);
+        loadDocument(viewer, options.document);
       });
     }
   );
@@ -110,17 +97,16 @@ function initialize() {
     // Call animation function
 
     animator(pointer, function () {
-
       if (pointer === "entirety") {
-        zoom(-46373.8, -56622.7, 45627.25, 12816, 1.09, 2385.26);
+        zoomEntirety();
       } else if (pointer === "engine") {
-        zoom(-17484, -364, 4568, 12927, 173, 1952);
+        zoomEngine();
       } else if (pointer === "body") {
-        zoom(53143, -7200, 5824, 12870, -327.5, 1674);
+        zoomBody();
       } else if (pointer === "interior") {
-        zoom(20459, -19227, 19172.5, 13845, 1228.6, 2906);
+        zoomInterior();
       } else if (pointer === "wheels") {
-        zoom(260.3, 26327, 954, 371.5, 134, 2242.7);
+        zoomWheels();
       }
     });
   });
@@ -141,6 +127,22 @@ function zoom(posx, posy, posz, tarx, tary, tarz) {
   viewer.impl.controls.setWorldUp(up);
 }
 
+function zoomEntirety() {
+  zoom(-46373.8, -56622.7, 45627.25, 12816, 1.09, 2385.26);
+}
+function zoomEngine() {
+  zoom(-17484, -364, 4568, 12927, 173, 1952);
+}
+function zoomBody() {
+  zoom(53143, -7200, 5824, 12870, -327.5, 1674);
+}
+function zoomInterior() {
+  zoom(20459, -19227, 19172.5, 13845, 1228.6, 2906);
+}
+function zoomWheels() {
+  zoom(260.3, 26327, 954, 371.5, 134, 2242.7);
+}
+
 // Rotate the view by 90 degrees around both the X and Z axes
 
 function setInitialView() {
@@ -155,7 +157,7 @@ function setInitialView() {
   var axisZ = new THREE.Vector3(0, 0, 1);
   var angle = 0.5 * Math.PI;
   var mat =
-    new THREE.Matrix4().makeRotationAxis(axisZ, -angle);
+    new THREE.Matrix4().makeRotationAxis(axisZ, angle);
   mat.multiply(
     new THREE.Matrix4().makeRotationAxis(axisX, angle)
   );
@@ -174,11 +176,13 @@ function setInitialView() {
 // loading properly (we get a 5% notification early on that we
 // need to ignore - it comes too soon)
 
+var viewInitialized = false;
+
 function progressListener(param) {
 
-  if (param.percent > 0.1 && param.percent < 5) {
+  if (param.percent > 0.1 && param.percent < 5 && !viewInitialized) {
 
-    viewer.removeEventListener("progress", progressListener);
+    viewInitialized = true;
 
     setInitialView();
 
@@ -193,13 +197,17 @@ function progressListener(param) {
       }
     }
   }
+  else if (param.percent > 5) {
+    viewer.removeEventListener("progress", progressListener);
+    zoomEntirety();
+  }
 }
 
-function loadDocument(viewer, auth, docId) {
+function loadDocument(viewer, docId) {
 
   var path = VIEWING_URL + '/' + docId.substr(4);
 
-  Autodesk.Viewing.Document.load(path, auth,
+  Autodesk.Viewing.Document.load(path,
     function (document) {
       var geometryItems = [];
 
