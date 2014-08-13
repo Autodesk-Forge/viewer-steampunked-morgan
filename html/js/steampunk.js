@@ -1,5 +1,6 @@
 var viewer;
 
+// Many thanks 
 function initialize() {
 
   // Get our access token from the internal web-service API
@@ -18,7 +19,24 @@ function initialize() {
       var elem = document.getElementById('viewer3d');
       viewer = new Autodesk.Viewing.Viewer3D(elem, {});
       viewer.initialize();
-      Autodesk.Viewing.Initializer(options, function() {
+
+      // Go with the "Riverbank" lighting and background effect
+
+      viewer.impl.setLightPreset(8);
+
+      // We have a heavy model, so let's save some work during
+      // navigation
+
+      viewer.setOptimizeNavigation(true);
+
+      // Let's zoom in and out of the pivot - the screen
+      // real estate is fairly limited - and reverse the
+      // zoom direction
+
+      viewer.navigation.setZoomTowardsPivot(true);
+      viewer.navigation.setReverseZoomDirection(true);
+
+      Autodesk.Viewing.Initializer(options, function () {
         loadDocument(viewer, options.document);
       });
     }
@@ -68,7 +86,7 @@ function initialize() {
     // whirring
 
     if (callback) {
-      setTimeout(function () { callback(); }, 500);
+      setTimeout(function () { callback(); }, 400);
     }
   }
 
@@ -173,11 +191,6 @@ function progressListener(param) {
     // Zoom to the overal view initially
 
     zoomEntirety();
-
-    // Let's zoom in and out of the pivot - the screen
-    // real estate is fairly limited
-
-    viewer.navigation.setZoomTowardsPivot(true);
   }
 }
 
