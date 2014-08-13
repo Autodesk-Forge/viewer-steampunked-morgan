@@ -112,23 +112,10 @@ function initialize() {
   });
 }
 
-// Set the camera based on a position and target location
-
-function zoom(posx, posy, posz, tarx, tary, tarz) {
-
-  var pos = new THREE.Vector3(posx, posy, posz);
-  var lat = new THREE.Vector3(tarx, tary, tarz);
-
-  viewer.impl.controls.setViewpoint(pos, lat);
-
-  // Make sure our up vector is correct for this model
-
-  var up = new THREE.Vector3(0, 0, 1);
-  viewer.impl.controls.setWorldUp(up);
-}
+// Helper functions to zoom into a specific part of the model
 
 function zoomEntirety() {
-  zoom(-46373.8, -56622.7, 45627.25, 12816, 1.09, 2385.26);
+  zoom(-48722.5, -54872, 44704.8, 10467.3, 1751.8, 1462.8);
 }
 function zoomEngine() {
   zoom(-17484, -364, 4568, 12927, 173, 1952);
@@ -143,51 +130,37 @@ function zoomWheels() {
   zoom(260.3, 26327, 954, 371.5, 134, 2242.7);
 }
 
-// Rotate the view by 90 degrees around both the X and Z axes
+// Set the camera based on a position and target location
 
-function setInitialView() {
+function zoom(px, py, pz, tx, ty, tz) {
 
-  var cam = viewer.getCamera();
+  // Make sure our up vector is correct for this model
 
-  var pos = cam.position.clone();
-  var up = cam.up;
-  var lat = viewer.impl.controls.getLookAtPoint().clone();
+  viewer.navigation.setWorldUpVector(new THREE.Vector3(0, 0, 1));
 
-  var axisX = new THREE.Vector3(1, 0, 0);
-  var axisZ = new THREE.Vector3(0, 0, 1);
-  var angle = 0.5 * Math.PI;
-  var mat =
-    new THREE.Matrix4().makeRotationAxis(axisZ, angle);
-  mat.multiply(
-    new THREE.Matrix4().makeRotationAxis(axisX, angle)
+  // This performs a smooth view transition (we might also use
+  // setView() to get there more directly)
+
+  viewer.navigation.setRequestTransition(
+    true,
+    new THREE.Vector3(px, py, pz), new THREE.Vector3(tx, ty, tz),
+    viewer.getFOV()
   );
-
-  pos.applyMatrix4(mat);
-  up.applyMatrix4(mat);
-
-  viewer.impl.controls.setViewpoint(pos, lat);
-  viewer.impl.controls.setWorldUp(up);
-
-  viewer.impl.controls.fitToView(true);
-  viewer.impl.controls.recordHomeView();
 }
 
 // Progress listener to set the view once the data has started
 // loading properly (we get a 5% notification early on that we
 // need to ignore - it comes too soon)
 
-var viewInitialized = false;
-
 function progressListener(param) {
 
-  if (param.percent > 0.1 && param.percent < 5 && !viewInitialized) {
+  if (param.percent > 0.1 && param.percent < 5) {
 
-    viewInitialized = true;
+    // Remove the listener once called - one-time operation
 
-    setInitialView();
+    viewer.removeEventListener("progress", progressListener);
 
-    // Go through the materials and make an red ones appear grey
-    // (this helps with certain generic materials not loading)
+    // Iterate the materials to change any red ones to grey
 
     for (var p in viewer.impl.materials) {
       var m = viewer.impl.materials[p];
@@ -196,10 +169,15 @@ function progressListener(param) {
         m.needsUpdate = true;
       }
     }
-  }
-  else if (param.percent > 5) {
-    viewer.removeEventListener("progress", progressListener);
+
+    // Zoom to the overal view initially
+
     zoomEntirety();
+
+    // Let's zoom in and out of the pivot - the screen
+    // real estate is fairly limited
+
+    viewer.navigation.setZoomTowardsPivot(true);
   }
 }
 
