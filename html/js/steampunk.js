@@ -1,6 +1,11 @@
 var viewer;
 
-// Many thanks 
+// Many thanks to Dan Wellman (@danwellman). Not only did he write
+// the excellent post that formed the basis for this application's
+// Steampunk UI, he provided the artwork to help build a custom
+// version...
+// http://www.dmxzone.com/go/18220/an-image-viewer-with-the-dmxzone-universal-css-transforms-library/
+
 function initialize() {
 
   // Get our access token from the internal web-service API
