@@ -193,7 +193,7 @@ function progressListener(param) {
       }
     }
 
-    // Zoom to the overal view initially
+    // Zoom to the overall view initially
 
     zoomEntirety();
   }

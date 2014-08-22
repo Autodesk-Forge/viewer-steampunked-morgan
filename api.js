@@ -17,7 +17,7 @@
 ///////////////////////////////////////////////////////////////////
 
 var CONSUMER_KEY = '*** Your key goes here ***';
-var CONSUMER_SECRET = '*** ‘Your secret goes here ***’;
+var CONSUMER_SECRET = '*** Your secret goes here ***';
 var BASE_URL = 'https://developer.api.autodesk.com';
 
 var request = require('request');
