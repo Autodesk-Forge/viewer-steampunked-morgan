@@ -17,31 +17,33 @@ function initialize() {
       options.env = "AutodeskProduction";
       options.accessToken = accessToken;
       options.document =
-        "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXNy5mM2Q=";
+        "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c3RlYW1idWNrL1NwTTNXNy5mM2Q=";
 
       // Create and initialize our 3D viewer
 
       var elem = document.getElementById('viewer3d');
       viewer = new Autodesk.Viewing.Viewer3D(elem, {});
-      viewer.initialize();
-
-      // Go with the "Riverbank" lighting and background effect
-
-      viewer.impl.setLightPreset(8);
-
-      // We have a heavy model, so let's save some work during
-      // navigation
-
-      viewer.setOptimizeNavigation(true);
-
-      // Let's zoom in and out of the pivot - the screen
-      // real estate is fairly limited - and reverse the
-      // zoom direction
-
-      viewer.navigation.setZoomTowardsPivot(true);
-      viewer.navigation.setReverseZoomDirection(true);
 
       Autodesk.Viewing.Initializer(options, function () {
+
+        viewer.initialize();
+
+        // Go with the "Riverbank" lighting and background effect
+
+        viewer.impl.setLightPreset(8);
+
+        // We have a heavy model, so let's save some work during
+        // navigation
+
+        viewer.setOptimizeNavigation(true);
+
+        // Let's zoom in and out of the pivot - the screen
+        // real estate is fairly limited - and reverse the
+        // zoom direction
+
+        viewer.navigation.setZoomTowardsPivot(true);
+        viewer.navigation.setReverseZoomDirection(true);
+
         loadDocument(viewer, options.document);
       });
     }
@@ -159,6 +161,7 @@ function zoom(px, py, pz, tx, ty, tz) {
 
   // Make sure our up vector is correct for this model
 
+  viewer.navigation.setWorldUpVector(new THREE.Vector3(1, 0, 0));
   viewer.navigation.setWorldUpVector(new THREE.Vector3(0, 0, 1));
 
   // This performs a smooth view transition (we might also use
@@ -185,15 +188,17 @@ function progressListener(param) {
 
     // Iterate the materials to change any red ones to grey
 
-    for (var p in viewer.impl.materials) {
-      var m = viewer.impl.materials[p];
-      if (m.color.r >= 0.5 && m.color.g == 0 && m.color.b == 0) {
-        m.color.r = m.color.g = m.color.b = 0.5;
-        m.needsUpdate = true;
+    for (var p in viewer.model.myData.materials.materials) {
+      var m = viewer.model.myData.materials.materials[p];
+      var c =
+        m.materials[0].properties.colors.generic_diffuse.values[0];
+      if (c.r >= 0.5 && c.g == 0 && c.b == 0) {
+        c.r = c.g = c.b = 0.5;
+        //m.needsUpdate = true;
       }
     }
 
-    // Zoom to the overall view initially
+    // Zoom to the overal view initially
 
     zoomEntirety();
   }
@@ -201,9 +206,10 @@ function progressListener(param) {
 
 function loadDocument(viewer, docId) {
 
-  var path = VIEWING_URL + '/' + docId.substr(4);
+  if (docId.substring(0, 4) !== 'urn:')
+    docId = 'urn:' + docId;
 
-  Autodesk.Viewing.Document.load(path,
+  Autodesk.Viewing.Document.load(docId,
     function (document) {
       var geometryItems = [];
 
