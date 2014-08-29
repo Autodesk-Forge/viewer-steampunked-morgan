@@ -161,16 +161,23 @@ function zoom(px, py, pz, tx, ty, tz) {
 
   // Make sure our up vector is correct for this model
 
-  viewer.navigation.setWorldUpVector(new THREE.Vector3(0, 0, 1));
+  var camera = viewer.autocamCamera;
+  camera.up = new THREE.Vector3(0, 0, 1);
+  viewer.navigation.setWorldUpVector(camera.up);
 
   // This performs a smooth view transition (we might also use
   // setView() to get there more directly)
 
-  viewer.navigation.setRequestTransition(
-    true,
+  viewer.impl.controls.transitionView(
     new THREE.Vector3(px, py, pz), new THREE.Vector3(tx, ty, tz),
-    viewer.getFOV()
+    camera.fov, camera.up, true
   );
+
+  //viewer.navigation.setRequestTransition( 
+  //  true,
+  //  new THREE.Vector3(px, py, pz), new THREE.Vector3(tx, ty, tz),
+  //  viewer.getFOV()
+  //);
 }
 
 // Progress listener to set the view once the data has started
@@ -187,13 +194,11 @@ function progressListener(param) {
 
     // Iterate the materials to change any red ones to grey
 
-    for (var p in viewer.model.myData.materials.materials) {
-      var m = viewer.model.myData.materials.materials[p];
-      var c =
-        m.materials[0].properties.colors.generic_diffuse.values[0];
-      if (c.r >= 0.5 && c.g == 0 && c.b == 0) {
-        c.r = c.g = c.b = 0.5;
-        //m.needsUpdate = true;
+    for (var p in viewer.impl.matman().materials) {
+      var m = viewer.impl.matman().materials[p];
+      if (m.color.r >= 0.5 && m.color.g == 0 && m.color.b == 0) {
+        m.color.r = m.color.g = m.color.b = 0.5;
+        m.needsUpdate = true;
       }
     }
 
