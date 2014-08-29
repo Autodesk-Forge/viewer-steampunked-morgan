@@ -161,7 +161,6 @@ function zoom(px, py, pz, tx, ty, tz) {
 
   // Make sure our up vector is correct for this model
 
-  viewer.navigation.setWorldUpVector(new THREE.Vector3(1, 0, 0));
   viewer.navigation.setWorldUpVector(new THREE.Vector3(0, 0, 1));
 
   // This performs a smooth view transition (we might also use
