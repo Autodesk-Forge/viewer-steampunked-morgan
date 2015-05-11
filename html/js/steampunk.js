@@ -159,25 +159,25 @@ function zoomWheels() {
 
 function zoom(px, py, pz, tx, ty, tz) {
 
+  // From v1.2.9 a global offset value was applied. So adjust for
+  // this here, rather than changing the hardcoded camera/target
+  // coordinates
+
+  var off = viewer.model.getData().globalOffset;
+
   // Make sure our up vector is correct for this model
 
   var camera = viewer.autocamCamera;
   camera.up = new THREE.Vector3(0, 0, 1);
-  viewer.navigation.setWorldUpVector(camera.up);
 
   // This performs a smooth view transition (we might also use
   // setView() to get there more directly)
 
-  viewer.impl.controls.transitionView(
-    new THREE.Vector3(px, py, pz), new THREE.Vector3(tx, ty, tz),
-    camera.fov, camera.up, true
+  viewer.navigation.setRequestTransitionWithUp(
+    true, new THREE.Vector3(px - off.x, py - off.y, pz - off.z),
+    new THREE.Vector3(tx - off.x, ty - off.y, tz - off.z),
+    camera.fov, camera.up
   );
-
-  //viewer.navigation.setRequestTransition( 
-  //  true,
-  //  new THREE.Vector3(px, py, pz), new THREE.Vector3(tx, ty, tz),
-  //  viewer.getFOV()
-  //);
 }
 
 // Progress listener to set the view once the data has started
@@ -201,6 +201,11 @@ function progressListener(param) {
         m.needsUpdate = true;
       }
     }
+
+    // Setting this here gives us correct ground shadows and
+    // navigation. Note that it is model-specific
+
+    viewer.navigation.setWorldUpVector(new THREE.Vector3(0, 0, 1));
 
     // Zoom to the overal view initially
 
