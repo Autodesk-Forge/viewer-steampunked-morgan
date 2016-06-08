@@ -46,9 +46,9 @@ Create 3 variables like this:
 
 a. PORT = 80
 
-b. CONSUMERKEY = <your consumer key>
+b. CONSUMERKEY = &lt;your consumer key&gt;
 
-c. CONSUMERSECRET = <your consumer secret>
+c. CONSUMERSECRET = &lt;your consumer secret&gt;
 
 Next restart the server.
 
@@ -91,7 +91,7 @@ Next restart the server.
    ```
    * OSX/Linux<br />
    ```
-   sudo [PORT=<port>] node start.js
+   sudo [PORT=<port>] node server.js
    ```
    <br />
    <b>Note:</b> the port argument can be omitted and default to port 5000. If port 80 is already in use by another
@@ -103,19 +103,19 @@ Next restart the server.
 
 1. Clone this repo on your server (or local machine),
 
-2. Go in your project directory and edit the api.js file
+2. Go in your project directory and edit the api.js file.
    Put your CONSUMERKEY and CONSUMERSECRET keys onto the placeholders line #19 and #20.
 
-3. You are done for the setup, launch the node server using the command '[sudo] node start.js'.
+3. You are done for the setup, launch the node server using the command '[sudo] node server.js'.
    sudo is required only on OSX and Linux.<br />
    * Windows<br />
    ```
    [set PORT=<port>]
-   node start.js
+   node server.js
    ```
    * OSX/Linux<br />
    ```
-   sudo [PORT=<port>] node start.js
+   sudo [PORT=<port>] node server.js
    ```
    <br />
    <b>Note:</b> the port argument can be omitted and default to port 5000. If port 80 is already in use by another
