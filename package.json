@@ -1,26 +1,54 @@
 {
-	"name": "SteamNodeServer",
-	"version": "0.1.0dev",
-	"private": true,
+	"name": "SteamPunked-Morgan",
+	"description": "A Node.js server using the Forge Viewer to display the Morgan 3 Wheeler",
+	"homepage": "http://autode.sk/m3w",
+	"version": "1.0.0",
+	"private": false,
 	"author": "Kean Walmsley - Autodesk",
-	"description": "Node.js Server app the Steampunk viewer",
 	"contributors": [
 		{"name": "Kean Walmsley"},
 		{"name": "Philippe Leefsma"},
 		{"name": "Jon Hall"},
 		{"name": "Jan Liska"}
 	],
-	"scripts": {
-		"predeploy": "echo Deploying SteamNodeServer",
-		"postdepoly": "echo SteamNodeServer Deployed"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Developer-Autodesk/client-steampunked-morgan.git"
 	},
-	"dependencies": {
-		"socket.io": "0.9.x",
-		"express": "4.x",
-		"morgan": "1.x",
-		"request": "*"
+	"bugs": {
+		"url": "https://github.com/Developer-Autodesk/client-steampunked-morgan/issues"
 	},
+	"license": "MIT",
 	"engines": {
-		"node": "0.10.x"
+		"node": ">= 5.11.1",
+		"npm": ">= 3.9.3"
+	},
+	"scripts": {
+		"start": "node server.js"
+	},
+	"files": [
+		"LICENSE",
+		"README.md"
+	],
+	"keywords": [
+		"express",
+		"lmv",
+		"web",
+		"rest",
+		"restful",
+		"router",
+		"app",
+		"api",
+		"steampunked",
+		"morgan"
+	],
+	"dependencies": {
+		"express": "^4.13.4",
+		"morgan": "^1.7.0",
+		"request": "^2.72.0"
+	},
+	"devDependencies": {
+	},
+	"optionalDependencies": {
 	}
 }

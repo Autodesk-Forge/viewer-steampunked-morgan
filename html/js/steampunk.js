@@ -9,7 +9,7 @@ var viewer;
 function initialize() {
 
   // Get our access token from the internal web-service API
-  
+
   $.get("http://" + window.location.host + '/api/token',
     function (accessToken) {
 
@@ -105,7 +105,7 @@ function initialize() {
 
     var hash = window.location.hash.split("#")[1];
 
-    // Position over		
+    // Position over
 
     animator(hash);
   }
@@ -196,7 +196,7 @@ function progressListener(param) {
 
     for (var p in viewer.impl.matman().materials) {
       var m = viewer.impl.matman().materials[p];
-      if (m.color.r >= 0.5 && m.color.g == 0 && m.color.b == 0) {
+      if (m.color && m.color.r && m.color.r >= 0.5 && m.color.g == 0 && m.color.b == 0) {
         m.color.r = m.color.g = m.color.b = 0.5;
         m.needsUpdate = true;
       }
