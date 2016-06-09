@@ -10,7 +10,7 @@ function initialize() {
 
   // Get our access token from the internal web-service API
 
-  $.get("http://" + window.location.host + '/api/token',
+  $.get(window.location.protocol + "//" + window.location.host + '/api/token',
     function (accessToken) {
 
       var options = {};
