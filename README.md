@@ -13,6 +13,11 @@ Please refer to http://through-the-interface.typepad.com/through_the_interface/2
 for the backroud story fo this sample.
 
 
+### Thumbnail
+
+![thumbnail](img/SM_thumbnail.png)
+
+
 ## Dependencies
 
 This sample is dependent on the server part on Node.js and couple of Node.js extensions
