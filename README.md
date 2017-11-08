@@ -122,6 +122,9 @@ Next restart the server.
    application (like Skype, or IIS, or Apache, ...), you can use any other free port such as 8000, 3000, etc...
    But in the next section you would need to specify the port to use, i.e. http://localhost[:port]/
 
+### Thumbnail
+
+![thumbnail](/morganWheeler.png)
 
 --------
 
