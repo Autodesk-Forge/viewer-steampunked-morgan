@@ -124,7 +124,7 @@ Next restart the server.
 
 ### Thumbnail
 
-![thumbnail](/morganWheeler.png)
+![thumbnail](/thumbnail.png)
 
 --------
 
