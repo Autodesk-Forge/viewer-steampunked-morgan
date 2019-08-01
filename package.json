@@ -6,10 +6,18 @@
 	"private": false,
 	"author": "Kean Walmsley - Autodesk",
 	"contributors": [
-		{"name": "Kean Walmsley"},
-		{"name": "Philippe Leefsma"},
-		{"name": "Jon Hall"},
-		{"name": "Jan Liska"}
+		{
+			"name": "Kean Walmsley"
+		},
+		{
+			"name": "Philippe Leefsma"
+		},
+		{
+			"name": "Jon Hall"
+		},
+		{
+			"name": "Jan Liska"
+		}
 	],
 	"repository": {
 		"type": "git",
@@ -47,8 +55,6 @@
 		"morgan": "^1.7.0",
 		"request": "^2.72.0"
 	},
-	"devDependencies": {
-	},
-	"optionalDependencies": {
-	}
+	"devDependencies": {},
+	"optionalDependencies": {}
 }

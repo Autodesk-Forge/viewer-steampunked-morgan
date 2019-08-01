@@ -2,16 +2,16 @@
 
 [![Node.js](https://img.shields.io/badge/Node.js-5.11.1-blue.svg)](https://nodejs.org/)
 [![npm](https://img.shields.io/badge/npm-3.9.3-blue.svg)](https://www.npmjs.com/)
-[![Viewer](https://img.shields.io/badge/Forge%20Viewer-v2.17-green.svg)](http://developer-autodesk.github.io/)
+[![Viewer](https://img.shields.io/badge/Forge%20Viewer-v7.1-green.svg)](http://developer-autodesk.github.io/)
 ![Platforms](https://img.shields.io/badge/platform-windows%20%7C%20osx%20%7C%20linux-lightgray.svg)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)
 
-
 ## Description
 
-Please refer to http://through-the-interface.typepad.com/through_the_interface/2014/07/my-first-autodesk-360-viewer-sample.html
+Please refer to https://www.keanw.com/2014/07/my-first-autodesk-360-viewer-sample.html
 for the backroud story fo this sample.
 
+Live demo at: https://autode.sk/m3w
 
 ## Dependencies
 
@@ -131,7 +131,6 @@ Next restart the server.
 ## License
 
 This sample is licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT). Please see the [LICENSE](LICENSE) file for full details.
-
 
 ## Written by
 

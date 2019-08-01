@@ -32,7 +32,7 @@ exports.getToken = function (req, res) {
     client_id: CONSUMER_KEY,
     client_secret: CONSUMER_SECRET,
     grant_type: 'client_credentials'
-  }
+  };
 
   request.post(BASE_URL + '/authentication/v1/authenticate',
     { form: params },
