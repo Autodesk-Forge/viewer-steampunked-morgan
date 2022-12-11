@@ -51,7 +51,7 @@
 		"morgan"
 	],
 	"dependencies": {
-		"express": "^4.13.4",
+		"express": "^4.17.3",
 		"morgan": "^1.7.0",
 		"request": "^2.72.0"
 	},
