@@ -13,6 +13,11 @@ for the backroud story fo this sample.
 
 Live demo at: https://autode.sk/m3w
 
+### Thumbnail
+
+![thumbnail](img/SM_thumbnail.png)
+
+
 ## Dependencies
 
 This sample is dependent on the server part on Node.js and couple of Node.js extensions
